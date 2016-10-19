@@ -12,7 +12,7 @@ public class QuoteActivity extends SingleFragmentActivity implements QuoteFragme
     private static final String EXTRA_QUOTE_ID = "extra_quote_id";
 
     @Override
-    Fragment getFragment() {
+    Fragment createFragment() {
         Intent intent = getIntent();
         quoteId = intent.getStringExtra(EXTRA_QUOTE_ID);
         return QuoteFragment.newInstance(quoteId);

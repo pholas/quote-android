@@ -23,7 +23,7 @@ public class QuoteEditActivity extends SingleFragmentActivity implements QuoteEd
     }
 
     @Override
-    Fragment getFragment() {
+    Fragment createFragment() {
         Intent intent = getIntent();
         Bundle extra = intent.getExtras();
         String quoteId = extra != null ? extra.getString(EXTRA_QUOTE_ID) : null;

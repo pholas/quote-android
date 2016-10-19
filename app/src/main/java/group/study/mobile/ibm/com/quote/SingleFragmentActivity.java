@@ -1,6 +1,7 @@
 package group.study.mobile.ibm.com.quote;
 
 import android.os.Bundle;
+import android.support.annotation.LayoutRes;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBar;
@@ -12,10 +13,15 @@ import android.support.v7.widget.Toolbar;
  */
 
 public abstract class SingleFragmentActivity extends AppCompatActivity {
+
+    @LayoutRes
+    protected int getLayoutResId(){
+        return R.layout.fragment_container;
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_container);
+        setContentView(getLayoutResId());
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
@@ -23,11 +29,17 @@ public abstract class SingleFragmentActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
-
         FragmentManager fm = getSupportFragmentManager();
-        fm.beginTransaction().add(R.id.fragment_container, getFragment())
-                .commit();
+        Fragment fragment = fm.findFragmentById(R.id.fragment_container);
+
+        if (fragment == null) {
+            fragment = createFragment();
+            fm.beginTransaction().add(R.id.fragment_container, fragment)
+                    .commit();
+        }
+
+
     }
 
-    abstract Fragment getFragment();
+    abstract Fragment createFragment();
 }
