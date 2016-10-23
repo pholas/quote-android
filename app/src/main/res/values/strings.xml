@@ -4,4 +4,5 @@
     <string name="quote_author_hint">Author</string>
     <string name="action_save_quote">Save</string>
     <string name="title_activity_quote_list">QuoteListActivity</string>
+    <string name="action_edit_quote">Edit</string>
 </resources>

@@ -1,5 +1,6 @@
 package group.study.mobile.ibm.com.quote;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -35,5 +36,9 @@ public class QuoteEditActivity extends SingleFragmentActivity implements QuoteEd
 
     }
 
-
+    @Override
+    public void onQuoteSaved() {
+        setResult(Activity.RESULT_OK);
+        finish();
+    }
 }

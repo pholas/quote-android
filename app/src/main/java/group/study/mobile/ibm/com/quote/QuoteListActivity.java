@@ -4,6 +4,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.google.android.gms.appindexing.Action;
@@ -11,7 +12,10 @@ import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.appindexing.Thing;
 import com.google.android.gms.common.api.GoogleApiClient;
 
-public class QuoteListActivity extends SingleFragmentActivity implements QuoteListFragment.OnListFragmentInteractionListener, QuoteFragment.OnFragmentInteractionListener {
+public class QuoteListActivity extends SingleFragmentActivity
+        implements QuoteListFragment.OnListFragmentInteractionListener,
+        QuoteFragment.OnFragmentInteractionListener,
+        QuoteEditFragment.OnFragmentInteractionListener {
     private static final int COL_COUNT = 1;
     private static final int REQUEST_CODE_CREATE_QUOTE = 1;
     /**
@@ -47,15 +51,17 @@ public class QuoteListActivity extends SingleFragmentActivity implements QuoteLi
         return QuoteListFragment.newInstance(COL_COUNT);
     }
 
+    private String selectedQuoteId;
+
     @Override
     public void onListFragmentInteraction(Quote item) {
-        String quoteId = item.id;
+        selectedQuoteId = item.id;
         if (findViewById(R.id.detail_fragment_container) != null) {
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.detail_fragment_container, QuoteFragment.newInstance(quoteId))
+                    .replace(R.id.detail_fragment_container, QuoteFragment.newInstance(selectedQuoteId))
                     .commit();
         } else {
-            startActivity(QuoteActivity.newIntent(this, quoteId));
+            startActivity(QuoteActivity.newIntent(this, selectedQuoteId));
         }
 
     }
@@ -100,5 +106,34 @@ public class QuoteListActivity extends SingleFragmentActivity implements QuoteLi
     @Override
     public void onFragmentInteraction(Uri uri) {
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_edit_quote:
+                if (findViewById(R.id.detail_fragment_container) != null) {
+                    getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.detail_fragment_container, QuoteEditFragment.newInstance(selectedQuoteId))
+                            .commit();
+                }
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    public void onQuoteSaved() {
+        if (findViewById(R.id.detail_fragment_container) != null) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.detail_fragment_container, QuoteFragment.newInstance(selectedQuoteId))
+                    .commit();
+            Fragment master_fragment = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+            if(master_fragment instanceof QuoteListFragment){
+                ((QuoteListFragment) master_fragment).updateUI();
+            }
+
+        }
     }
 }

@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -61,6 +63,7 @@ public class QuoteFragment extends Fragment {
         if (getArguments() != null) {
             quoteId = getArguments().getString(ARG_QUOTE_ID);
         }
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -88,6 +91,12 @@ public class QuoteFragment extends Fragment {
             }
         }.execute();
         return view;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menu_quote_edit, menu);
     }
 
     View.OnClickListener quoteClickListener = new View.OnClickListener() {

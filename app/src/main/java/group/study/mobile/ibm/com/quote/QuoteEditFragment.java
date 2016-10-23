@@ -1,6 +1,5 @@
 package group.study.mobile.ibm.com.quote;
 
-import android.app.Activity;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -66,7 +65,7 @@ public class QuoteEditFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.menu_quote_edit, menu);
+        inflater.inflate(R.menu.menu_quote_save, menu);
     }
 
     @Override
@@ -75,15 +74,11 @@ public class QuoteEditFragment extends Fragment {
             case R.id.action_save_quote:
                 createOrUpdateQuote();
 
-                getActivity().setResult(Activity.RESULT_OK);
-                getActivity().finish();
-
-                break;
+                mListener.onQuoteSaved();
+                return true;
             default:
-                break;
+                return super.onOptionsItemSelected(item);
         }
-
-        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -182,5 +177,7 @@ public class QuoteEditFragment extends Fragment {
      */
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction(Uri uri);
+
+        void onQuoteSaved();
     }
 }
