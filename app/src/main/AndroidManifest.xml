@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="group.study.mobile.ibm.com.quote">
 
     <application
@@ -9,11 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
         <activity android:name=".QuoteActivity"
-            android:parentActivityName=".QuoteListActivity">
+            android:parentActivityName=".QuoteListActivity"
+            tools:ignore="UnusedAttribute">
 
         </activity>
         <activity android:name=".QuoteEditActivity"
-            android:parentActivityName=".QuoteListActivity" />
+            android:parentActivityName=".QuoteListActivity"
+            tools:ignore="UnusedAttribute" />
         <activity
             android:name=".QuoteListActivity"
             android:label="@string/title_activity_quote_list"

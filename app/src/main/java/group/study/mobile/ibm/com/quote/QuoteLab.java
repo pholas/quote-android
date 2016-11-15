@@ -14,7 +14,7 @@ public class QuoteLab {
      * An array of sample (Quote) items.
      */
     public static final List<Quote> QUOTES = new ArrayList<>();
-    ;
+
     /**
      * A map of sample (Quote) items, by ID.
      */
