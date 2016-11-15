@@ -1,11 +1,19 @@
-# Built application files
-/build
-/*/build/
+# Gradle files
+/gradle.properties
+.gradle/
+
+# Generated files
+build/
+gen/
+models-gen/
+bin/
+out/
+/Test Results*
 
 # Crashlytics configuations
 com_crashlytics_export_strings.xml
 
-# Local configuration file (sdk path, etc)
+# Local configuration file
 local.properties
 
 # Gradle generated files
@@ -14,7 +22,16 @@ local.properties
 # Signing files
 .signing/
 
-# User-specific configurations
+# OS-specific files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# User specific Intellij files
 .idea/libraries/
 .idea/workspace.xml
 .idea/tasks.xml
@@ -28,11 +45,6 @@ local.properties
 .idea/vcs.xml
 *.iml
 
-# OS-specific files
-.DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
-Thumbs.db
+# Misc.
+/.metadata
+/git.store
